@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Page</title>
+</head>
+<body>
+<span>Oops!</span>
+<div>
+    <p>
+        There seems to be a problem with the page you requested
+        (<span th:text="${path}"></span>.)
+    </p>
+    <img th:src="@{/error.jpeg}" alt="" height="150px" width="200px">
+    <p th:text="${'Details:' + message}"></p>
+</div>
+</body>
+</html>
