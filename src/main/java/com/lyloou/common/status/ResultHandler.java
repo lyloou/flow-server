@@ -24,7 +24,7 @@ public class ResultHandler {
     public Result dataResult(StatusCode code, Object data) {
         String msg = apiStatusProps.message(code);
         Result result = new Result(code.get(), msg);
-        result.setData(data);
+        result.data(data);
         return result;
     }
 
