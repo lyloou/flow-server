@@ -1,5 +1,6 @@
 package com.lyloou.demo;
 
+import com.lyloou.common.exception.CommonException;
 import com.lyloou.common.status.ResultHandler;
 import com.lyloou.common.status.resp.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class GreetingController {
         Greeting greeting = new Greeting(counter.incrementAndGet(),
                 String.format(template, name));
         return resultHandler.dataResult(() -> Constants.STATUS_OK, greeting);
+    }
+
+    @RequestMapping("/exception")
+    public Result exception() {
+        throw new CommonException("asdfasfasdfas");
     }
 }
