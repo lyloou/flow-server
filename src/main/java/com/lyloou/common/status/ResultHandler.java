@@ -7,12 +7,8 @@ public class ResultHandler {
 
     private ApiStatusProps apiStatusProps;
 
-    void setApiStatusProps(ApiStatusProps apiStatusProps) {
+    public ResultHandler(ApiStatusProps apiStatusProps) {
         this.apiStatusProps = apiStatusProps;
-    }
-
-    public Result newResult(int code, String msg){
-        return new Result(code, msg);
     }
 
     public Result msgResult(StatusCode code) {
