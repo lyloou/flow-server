@@ -15,9 +15,7 @@ public class ApiStatusAutoConfiguration {
 
     @Bean
     public ResultHandler resultHandler(ApiStatusProps apiStatusProps) {
-        ResultHandler resultHandler = new ResultHandler();
-        resultHandler.setApiStatusProps(apiStatusProps);
-        return resultHandler;
+        return new ResultHandler(apiStatusProps);
     }
 
 }
