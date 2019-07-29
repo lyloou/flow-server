@@ -1,6 +1,6 @@
 package com.lyloou.common.serialization;
 
-import com.lyloou.common.utils.SerializerUtil;
+import com.lyloou.common.util.SerializerUtil;
 import org.apache.kafka.common.serialization.Serializer;
 
 import java.io.IOException;

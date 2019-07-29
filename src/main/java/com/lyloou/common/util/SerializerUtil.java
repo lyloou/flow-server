@@ -1,4 +1,4 @@
-package com.lyloou.common.utils;
+package com.lyloou.common.util;
 
 import org.nustaq.serialization.FSTObjectInput;
 import org.nustaq.serialization.FSTObjectOutput;
