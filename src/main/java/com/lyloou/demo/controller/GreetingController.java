@@ -27,10 +27,10 @@ public class GreetingController {
 
     @RequestMapping("/greeting")
     public Result greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        logger.info("logger-info", "asdfasdf");
-        logger.debug("logger-debug", "asdfasdf");
-        logger.warn("logger-warn", "asdfasdf");
-        logger.error("logger-error", "asdfasdf");
+        logger.info("logger-info: {}, more message", "param");
+        logger.debug("logger-debug: {}, more message", "param");
+        logger.warn("logger-warn: {}, more message", "param");
+        logger.error("logger-error: {}, more message", "param");
         counter.increment();
         GreetingVO greetingVO = new GreetingVO(counter.longValue(),
                 String.format(template, name));
