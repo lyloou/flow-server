@@ -1,34 +1,33 @@
-package com.lyloou.common.status.exception;
+package com.lyloou.common.exception;
 
 
-import com.lyloou.common.exception.CommonException;
 import com.lyloou.common.status.StatusCode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommonApiStatusException extends CommonException {
+public class ApiStatusException extends CommonException {
 
     private final StatusCode statusCode;
 
     private final List<StatusCode> innerStatusCode = new ArrayList<>();
 
-    public CommonApiStatusException(StatusCode statusCode) {
+    public ApiStatusException(StatusCode statusCode) {
         super();
         this.statusCode = statusCode;
     }
 
-    public CommonApiStatusException(String s, StatusCode statusCode) {
+    public ApiStatusException(String s, StatusCode statusCode) {
         super(s);
         this.statusCode = statusCode;
     }
 
-    public CommonApiStatusException(String s, StatusCode statusCode, Throwable throwable) {
+    public ApiStatusException(String s, StatusCode statusCode, Throwable throwable) {
         super(s, throwable);
         this.statusCode = statusCode;
     }
 
-    public CommonApiStatusException appendInnerStatusCode(StatusCode innerStatusCode) {
+    public ApiStatusException appendInnerStatusCode(StatusCode innerStatusCode) {
         this.innerStatusCode.add(innerStatusCode);
         return this;
     }

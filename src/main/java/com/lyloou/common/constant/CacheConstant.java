@@ -1,4 +1,4 @@
 package com.lyloou.common.constant;
 
-public class CacheConstant {
+public interface CacheConstant {
 }

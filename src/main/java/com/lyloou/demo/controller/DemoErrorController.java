@@ -1,4 +1,4 @@
-package com.lyloou.demo;
+package com.lyloou.demo.controller;
 
 
 import com.lyloou.common.status.ResultHandler;

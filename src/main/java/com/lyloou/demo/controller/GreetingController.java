@@ -1,8 +1,10 @@
-package com.lyloou.demo;
+package com.lyloou.demo.controller;
 
 import com.lyloou.common.exception.CommonException;
 import com.lyloou.common.status.ResultHandler;
-import com.lyloou.common.status.resp.Result;
+import com.lyloou.common.status.Result;
+import com.lyloou.common.constant.StatusConstants;
+import com.lyloou.demo.Greeting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +27,7 @@ public class GreetingController {
         counter.increment();
         Greeting greeting = new Greeting(counter.longValue(),
                 String.format(template, name));
-        return resultHandler.dataResult(() -> Constants.STATUS_OK, greeting);
+        return resultHandler.dataResult(() -> StatusConstants.STATUS_OK, greeting);
     }
 
     @RequestMapping("/exception")

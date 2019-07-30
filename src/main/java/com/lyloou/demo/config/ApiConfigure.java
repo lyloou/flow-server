@@ -1,4 +1,4 @@
-package com.lyloou.demo;
+package com.lyloou.demo.config;
 
 import com.lyloou.common.status.ApiStatusAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package com.lyloou.demo;
+package com.lyloou.common.constant;
 
-public interface Constants {
+public interface StatusConstants {
     int STATUS_UNKNOWN = 9999;
     int STATUS_OK = 0;
 

@@ -1,4 +1,4 @@
-package com.lyloou.common.status.resp;
+package com.lyloou.common.status;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Joiner;

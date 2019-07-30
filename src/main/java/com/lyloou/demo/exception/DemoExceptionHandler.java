@@ -4,7 +4,7 @@ package com.lyloou.demo.exception;
 import com.google.common.base.Throwables;
 import com.lyloou.common.exception.CommonException;
 import com.lyloou.common.status.ResultHandler;
-import com.lyloou.common.status.exception.CommonApiStatusException;
+import com.lyloou.common.exception.ApiStatusException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import static com.lyloou.demo.Constants.*;
+import static com.lyloou.common.constant.StatusConstants.*;
 
 // [SpringMVC重要注解（二）@ControllerAdvice - Franco的博客 - CSDN博客](https://blog.csdn.net/w372426096/article/details/78429141)
 @ControllerAdvice
@@ -31,8 +31,8 @@ public class DemoExceptionHandler {
         }
         Throwable throwable = Throwables.getRootCause(ex);
 
-        if (throwable instanceof CommonApiStatusException) {
-            CommonApiStatusException statusException = (CommonApiStatusException) throwable;
+        if (throwable instanceof ApiStatusException) {
+            ApiStatusException statusException = (ApiStatusException) throwable;
             return resultHandler.msgResult(statusException.getStatusCode());
         } else if (ex instanceof CommonException) {
             CommonException exception = (CommonException) throwable;

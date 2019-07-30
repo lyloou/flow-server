@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.lyloou.common.exception.CommonException;
+import com.lyloou.common.exception.HttpRespEmptyException;
 import okhttp3.*;
 import okio.BufferedSink;
 
@@ -18,7 +19,7 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class Client {
+public class HttpClient {
 
     private final int maxRequest;
 
@@ -31,7 +32,7 @@ public class Client {
     private final OkHttpClient client;
 
 
-    public Client() {
+    public HttpClient() {
         this(64, 16, 10, 30);
     }
 
@@ -41,7 +42,7 @@ public class Client {
      * @param connectTimeout
      * @param readTimeout
      */
-    public Client(int maxRequest, int maxRequestsPerHost, int connectTimeout, int readTimeout) {
+    public HttpClient(int maxRequest, int maxRequestsPerHost, int connectTimeout, int readTimeout) {
         this.maxRequest = maxRequest;
         this.maxRequestsPerHost = maxRequestsPerHost;
         this.connectTimeout = connectTimeout;
@@ -117,7 +118,7 @@ public class Client {
                 throw new CommonException("http client request has error ", e);
             }
         } else {
-            throw new CommonHttpRespEmptyException("response is empty");
+            throw new HttpRespEmptyException("response is empty");
         }
     }
 

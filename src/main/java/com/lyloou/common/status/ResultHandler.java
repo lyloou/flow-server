@@ -1,8 +1,6 @@
 package com.lyloou.common.status;
 
 
-import com.lyloou.common.status.resp.Result;
-
 public class ResultHandler {
 
     private ApiStatusProps apiStatusProps;

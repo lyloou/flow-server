@@ -1,4 +1,0 @@
-package com.lyloou.common.exception;
-
-public class ServiceException {
-}
