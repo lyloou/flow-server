@@ -1,11 +1,11 @@
-package com.lyloou.demo;
+package com.lyloou.demo.model.greeting;
 
-public class Greeting {
+public class GreetingVO {
 
     private final long id;
     private final String content;
 
-    public Greeting(long id, String content) {
+    public GreetingVO(long id, String content) {
         this.id = id;
         this.content = content;
     }
