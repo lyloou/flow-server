@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import static com.lyloou.demo.Constants.*;
 
+// [SpringMVC重要注解（二）@ControllerAdvice - Franco的博客 - CSDN博客](https://blog.csdn.net/w372426096/article/details/78429141)
 @ControllerAdvice
 public class DemoExceptionHandler {
     protected final Log logger = LogFactory.getLog(this.getClass());
