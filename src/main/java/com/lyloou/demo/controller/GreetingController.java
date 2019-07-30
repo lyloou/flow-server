@@ -1,9 +1,8 @@
 package com.lyloou.demo.controller;
 
-import com.lyloou.common.exception.CommonException;
-import com.lyloou.common.status.ResultHandler;
+import com.lyloou.common.exception.ParamException;
 import com.lyloou.common.status.Result;
-import com.lyloou.common.constant.StatusConstants;
+import com.lyloou.common.status.ResultHandler;
 import com.lyloou.demo.model.greeting.GreetingVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.atomic.LongAdder;
+
+import static com.lyloou.common.status.StatusCodeDict.COMMON_OK;
 
 @RestController
 public class GreetingController {
@@ -34,11 +35,11 @@ public class GreetingController {
         counter.increment();
         GreetingVO greetingVO = new GreetingVO(counter.longValue(),
                 String.format(template, name));
-        return resultHandler.dataResult(() -> StatusConstants.STATUS_OK, greetingVO);
+        return resultHandler.dataResult(() -> COMMON_OK, greetingVO);
     }
 
     @RequestMapping("/exception")
     public Result exception() {
-        throw new CommonException("asdfasfasdfas");
+        throw new ParamException("输入有误，请重新输入");
     }
 }

@@ -2,6 +2,7 @@ package com.lyloou.demo.controller;
 
 
 import com.lyloou.common.status.ResultHandler;
+import com.lyloou.common.status.StatusCodeDict;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class DemoErrorController implements ErrorController {
         if (LOGGER.isDebugEnabled() && null != exception) {
             LOGGER.debug(exception.getMessage(), exception);
         }
-        return resultHandler.msgResult(() -> httpCode);
+        return resultHandler.msgResult(() -> StatusCodeDict.of(httpCode));
     }
 
     @Override
