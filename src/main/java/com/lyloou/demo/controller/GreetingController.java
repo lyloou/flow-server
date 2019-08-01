@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.concurrent.atomic.LongAdder;
 
 import static com.lyloou.common.status.StatusCodeDict.COMMON_OK;
@@ -22,7 +24,8 @@ public class GreetingController {
 
     private final LongAdder counter = new LongAdder();
 
-    private static Logger logger = LoggerFactory.getLogger(GreetingController.class);
+    private static final Logger logger = LoggerFactory.getLogger(GreetingController.class);
+
     @Autowired
     private ResultHandler resultHandler;
 
@@ -41,5 +44,14 @@ public class GreetingController {
     @RequestMapping("/exception")
     public Result exception() {
         throw new ParamException("输入有误，请重新输入");
+    }
+
+    @RequestMapping("sayHi")
+    public Result sayHi(HttpServletRequest request,  HttpServletResponse response) {
+        Object hi = request.getAttribute("sayHi");
+        if (hi != null) {
+            logger.info("from HandlerInterceptor.preHandle.sayHi--->{}", hi);
+        }
+        return resultHandler.dataResult(() -> COMMON_OK, hi);
     }
 }
