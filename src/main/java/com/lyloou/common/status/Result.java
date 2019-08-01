@@ -20,21 +20,26 @@ public class Result {
         this.msg = msg;
     }
 
-    public Result msg(String msg) {
-        return msg(msg, ",");
+    public Result data(Object data) {
+        this.data = data;
+        return this;
     }
 
-    public Result msg(String msg, String sep) {
+    public Result msg(String msg) {
+        this.msg = msg;
+        return this;
+    }
+
+    public Result appendMsg(String msg) {
+        return appendMsg(msg, ", ");
+    }
+
+    public Result appendMsg(String msg, String sep) {
         if (!Strings.isNullOrEmpty(msg)) {
             this.msg = Joiner.on(sep).join(this.msg, msg);
         } else {
             this.msg = msg;
         }
-        return this;
-    }
-
-    public Result data(Object data) {
-        this.data = data;
         return this;
     }
 
