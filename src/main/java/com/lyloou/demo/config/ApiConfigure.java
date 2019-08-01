@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 
 @Configuration
-public class ApiConfigure extends WebMvcConfigurerAdapter {
+public class ApiConfigure implements WebMvcConfigurer {
 
     @Autowired
     private Environment environment;
@@ -18,7 +19,7 @@ public class ApiConfigure extends WebMvcConfigurerAdapter {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         if (Arrays.stream(environment.getActiveProfiles())
-                .anyMatch(env -> env.equalsIgnoreCase("test") || env.equalsIgnoreCase("dev"))) {
+                .anyMatch(env -> "test".equalsIgnoreCase(env) || env.equalsIgnoreCase("dev"))) {
             registry.addMapping("/**")
                     .allowedOrigins("*")
                     .allowedMethods("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH")
@@ -26,5 +27,8 @@ public class ApiConfigure extends WebMvcConfigurerAdapter {
         }
     }
 
-
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        ViewControllerHelper.handle(registry);
+    }
 }
