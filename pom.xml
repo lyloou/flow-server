@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lyloou</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>flow</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
-    <name>flow</name>
+    <name>Flow</name>
     <description>夫路</description>
 
     <parent>
