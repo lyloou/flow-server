@@ -35,7 +35,7 @@
 
 
         <javaModelGenerator
-                targetPackage="com.lyloou.demo.model.flow"
+                targetPackage="com.lyloou.flow.model.flow"
                 targetProject="src/main/java">
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
