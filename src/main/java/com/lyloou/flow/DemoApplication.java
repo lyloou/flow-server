@@ -19,6 +19,7 @@ public class DemoApplication {
     public static void main(String[] args) {
         addShutdownHook();
         SpringApplication.run(DemoApplication.class, args);
+
     }
 
     private static void addShutdownHook() {
