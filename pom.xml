@@ -5,11 +5,11 @@
 
     <groupId>com.lyloou</groupId>
     <artifactId>demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
-    <name>demo</name>
-    <description>Demo project for Spring Boot</description>
+    <name>flow</name>
+    <description>夫路</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
