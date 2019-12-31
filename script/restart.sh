@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 NAME=flow-0.0.1.jar
 
 cd $(dirname $0)
