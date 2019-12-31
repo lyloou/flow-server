@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source ./env.sh
 ps -ef|grep $NAME|grep -v grep|cut -c 9-15|xargs kill -15
 sleep 1

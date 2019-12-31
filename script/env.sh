@@ -1,4 +1,3 @@
-#!/bin/sh
-
+#!/bin/bash
 NAME=flow-0.0.1.jar
-RELEASE_DIR="~/w/java/spring-boot-demo/release/"
+RELEASE_DIR=/root/w/java/spring-boot-demo/release/
