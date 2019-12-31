@@ -18,14 +18,14 @@ import java.util.Properties;
 @MapperScan("com.lyloou.flow.mapper")
 @ComponentScan(basePackages = {"com.lyloou.flow", "com.lyloou.common"})
 @SpringBootTest
-public class DemoApplicationTests {
+public class FlowApplicationTests {
 
     @Autowired
     FlowMapper flowMapper;
 
     @Test
     public void testFlow() throws Exception {
-        System.out.println(flowMapper.getFlow(1));
+        System.out.println(flowMapper.getFlow(null));
     }
 
 

@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class DemoErrorController implements ErrorController {
+public class FlowErrorController implements ErrorController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DemoErrorController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FlowErrorController.class);
     private static final String ERROR_HANDLER = "/error";
 
     @Autowired

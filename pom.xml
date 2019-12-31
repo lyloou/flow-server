@@ -157,7 +157,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.lyloou.flow.DemoApplication</mainClass>
+                            <mainClass>com.lyloou.flow.FlowApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -5,7 +5,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * https://github.com/alibaba/sca-best-practice/blob/master/codeless-framework/codeless-core/src/main/java/com/alibaba/codeless/framework/core/utils/StringUtils.java
  */
-public interface StringUtils {
+public interface StringUtil {
 
     static boolean isEmpty(String s) {
         return s == null || s.trim().length() == 0;

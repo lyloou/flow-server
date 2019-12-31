@@ -13,12 +13,12 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.lyloou.flow", "com.lyloou.common"})
 @MapperScan("com.lyloou.flow.mapper")
-public class DemoApplication {
-    private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
+public class FlowApplication {
+    private static final Logger logger = LoggerFactory.getLogger(FlowApplication.class);
 
     public static void main(String[] args) {
         addShutdownHook();
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(FlowApplication.class, args);
 
     }
 

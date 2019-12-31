@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 /**
  * https://github.com/alibaba/sca-best-practice/blob/master/codeless-framework/codeless-core/src/main/java/com/alibaba/codeless/framework/core/utils/JsonUtils.java
  */
-public interface JsonUtils {
+public interface JsonUtil {
     String FORMAT = "yyyy-MM-dd HH:mm:ss";
     Gson GSON = new GsonBuilder()
             .setFieldNamingStrategy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
