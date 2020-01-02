@@ -29,4 +29,12 @@ public class Flow {
     private Boolean isArchived;
 
     private Boolean isDisabled;
+
+    public Boolean getIsArchived() {
+        return isArchived;
+    }
+
+    public Boolean getIsDisabled() {
+        return isDisabled;
+    }
 }
