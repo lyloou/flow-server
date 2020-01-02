@@ -1,3 +1,6 @@
+
+CREATE DATABASE flow CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
 create table event
 (
     id           bigint auto_increment comment '主键'
