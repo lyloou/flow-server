@@ -52,6 +52,8 @@ public class FlowController {
         int i = flowMapper.insertOrUpdateFlow(Flow.builder()
                 .day(flowReq.getDay())
                 .item(flowReq.getItem())
+                .isArchived(flowReq.isArchived())
+                .isDisabled(flowReq.isDisabled())
                 .build());
         return resultHandler.msgResult(() -> i >= 0 ? COMMON_OK : COMMON_UNKNOWN);
     }

@@ -26,8 +26,8 @@ public class Flow {
 
     private String item;
 
-    private Boolean is_archived;
+    private Boolean isArchived;
 
-    private Boolean is_disabled;
+    private Boolean isDisabled;
 
 }
