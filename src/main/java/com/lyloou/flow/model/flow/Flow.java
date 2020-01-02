@@ -25,4 +25,8 @@ public class Flow {
     private String day;
 
     private String item;
+
+    private Boolean isArchived;
+
+    private Boolean isDeleted;
 }
