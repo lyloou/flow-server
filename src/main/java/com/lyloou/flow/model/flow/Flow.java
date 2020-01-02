@@ -1,20 +1,12 @@
 package com.lyloou.flow.model.flow;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.Date;
 
 
 /**
  * @author lyloou
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Flow {
     private Long id;
 
@@ -30,11 +22,59 @@ public class Flow {
 
     private Boolean isDisabled;
 
-    public Boolean getIsArchived() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public Boolean getArchived() {
         return isArchived;
     }
 
-    public Boolean getIsDisabled() {
+    public void setArchived(Boolean archived) {
+        isArchived = archived;
+    }
+
+    public Boolean getDisabled() {
         return isDisabled;
+    }
+
+    public void setDisabled(Boolean disabled) {
+        isDisabled = disabled;
     }
 }
