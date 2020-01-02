@@ -1,5 +1,6 @@
 package com.lyloou.flow.model.flow;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,8 +27,10 @@ public class Flow {
 
     private String item;
 
+    @SerializedName("is_archived")
     private Boolean isArchived;
 
+    @SerializedName("is_disabled")
     private Boolean isDisabled;
 
 }
