@@ -27,3 +27,6 @@ create table flow
 )
     comment '夫路';
 
+ALTER TABLE `flow`.`flow` CHARACTER SET = utf8mb4, COLLATE = utf8mb4_general_ci;
+ALTER TABLE `flow`.`event` CHARACTER SET = utf8mb4, COLLATE = utf8mb4_general_ci;
+ALTER TABLE flow MODIFY COLUMN item longtext  CHARACTER SET utf8mb4  COLLATE utf8mb4_unicode_ci default '' NULL comment '发生的哪些具体事情';
