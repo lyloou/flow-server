@@ -12,4 +12,6 @@ import lombok.Data;
 public class FlowReq {
     private String day;
     private String item;
+    private boolean isArchived;
+    private boolean isDisabled;
 }

@@ -28,5 +28,5 @@ public class Flow {
 
     private Boolean isArchived;
 
-    private Boolean isDeleted;
+    private Boolean isDisabled;
 }

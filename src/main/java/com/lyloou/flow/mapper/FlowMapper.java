@@ -37,6 +37,7 @@ public interface FlowMapper {
      * @param flow flow实例
      * @return 影响的行数
      */
-    @Update("insert into flow (day, item) values (#{day},#{item}) on duplicate key update item=values(item)")
+    @Update("insert into flow (day,item,is_disabled,is_archived) values (#{day},#{item},${is_disabled},#{is_archived}) on duplicate key update" +
+            " item=values(item),is_disabled=values(is_disabled),is_archived=#{is_archived}")
     int insertOrUpdateFlow(Flow flow);
 }
