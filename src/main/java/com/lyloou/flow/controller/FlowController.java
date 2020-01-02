@@ -6,16 +6,16 @@ import com.lyloou.common.util.StringUtil;
 import com.lyloou.common.util.TimeUtil;
 import com.lyloou.flow.mapper.FlowMapper;
 import com.lyloou.flow.model.flow.Flow;
+import com.lyloou.flow.model.flow.FlowReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import static com.lyloou.common.status.StatusCodeDict.COMMON_OK;
+import static com.lyloou.common.status.StatusCodeDict.COMMON_UNKNOWN;
 
 @RestController
 @RequestMapping(path = "${apiVersion}/flow")
@@ -42,6 +42,15 @@ public class FlowController {
         }
         Flow flow = flowMapper.getFlow(day);
         return resultHandler.dataResult(() -> COMMON_OK, flow);
+    }
+
+    @PostMapping("/sync")
+    public Result sync(@RequestBody FlowReq flowReq) {
+        int i = flowMapper.insertOrUpdateFlow(Flow.builder()
+                .day(flowReq.getDay())
+                .item(flowReq.getItem())
+                .build());
+        return resultHandler.msgResult(() -> i >= 0 ? COMMON_OK : COMMON_UNKNOWN);
     }
 
 }

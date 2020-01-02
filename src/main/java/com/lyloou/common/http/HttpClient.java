@@ -2,6 +2,7 @@ package com.lyloou.common.http;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.lyloou.common.exception.CommonException;
 import com.lyloou.common.exception.HttpRespEmptyException;
@@ -83,6 +84,11 @@ public class HttpClient {
         return this.send(Joiner.on(joinStr).join(url, queryStr),
                 "GET", header, null, null, clazz);
     }
+
+    public <T> T postJson(String url, Object o, Class<T> clazz) {
+        return this.send(url, "POST", Maps.newHashMap(), "application/json;charset=UTF-8", new Gson().toJson(o), clazz);
+    }
+
 
     public <T> T post(String url, Map<String, String> header, String contentType, String body, Class<T> clazz) {
         return this.send(url, "POST", header, contentType, body, clazz);
