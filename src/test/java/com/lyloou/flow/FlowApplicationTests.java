@@ -1,16 +1,18 @@
 package com.lyloou.flow;
 
+import com.lyloou.flow.config.myproperties.MyPropertiesBean;
 import com.lyloou.flow.mapper.EventMapper;
 import com.lyloou.flow.mapper.FlowMapper;
-import com.lyloou.flow.properties.PropertiesBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
 
 import java.util.Properties;
 
@@ -23,17 +25,22 @@ public class FlowApplicationTests {
     @Autowired
     FlowMapper flowMapper;
 
+    /**
+     * 数据库测试：flow
+     */
     @Test
-    public void testFlow() throws Exception {
+    public void testFlow() {
         System.out.println(flowMapper.getFlow(null));
     }
-
 
     @Autowired
     EventMapper eventMapper;
 
+    /**
+     * 数据库测试：event
+     */
     @Test
-    public void testEvent() throws Exception {
+    public void testEvent() {
         System.out.println(eventMapper.listEvent());
     }
 
@@ -41,11 +48,42 @@ public class FlowApplicationTests {
     @Qualifier("myProperties")
     Properties properties;
 
+    /**
+     * 测试自定义的 properties
+     */
     @Test
     public void testProperties() {
-        System.out.println("==================================");
-        System.out.println(properties.getProperty(PropertiesBean.My.FLOW_KEY.name()));
-        System.out.println("==================================");
+        System.out.println(properties.getProperty(MyPropertiesBean.My.FLOW_KEY.name()));
     }
+
+    @Autowired
+    Jedis jedis;
+
+    /**
+     * 测试 jedis
+     */
+    @Test
+    public void testJedis() {
+        String cacheName = "a-key" + System.currentTimeMillis();
+        String key = jedis.get(cacheName);
+        assert null == key;
+
+        String value = "hello";
+        jedis.setex(cacheName, 60, value);
+        key = jedis.get(cacheName);
+        assert key.equals(value);
+    }
+
+    @Value("${spring.application.name}")
+    private String applicationName;
+
+    /**
+     * 测试加载 application.properties
+     */
+    @Test
+    public void testApplicationProperties() {
+        System.out.println(applicationName);
+    }
+
 
 }
