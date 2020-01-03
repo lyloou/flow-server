@@ -51,7 +51,7 @@ public interface FlowMapper {
     @Update("<script>" +
             "insert into flow (day,item,is_disabled,is_archived) values " +
             "<foreach collection='flows' item='item' separator=','> " +
-            "(#{day},#{item},#{isDisabled},#{isArchived}) " +
+            "(#{item.day},#{item.item},#{item.isDisabled},#{item.isArchived}) " +
             "</foreach> " +
             "on duplicate key update " +
             "item=values(item),is_disabled=values(is_disabled),is_archived=values(is_archived)" +
