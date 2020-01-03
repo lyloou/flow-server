@@ -18,16 +18,20 @@ public enum StatusCodeDict {
     SYSTEM_500(500, "哎哟，这里有个锅"),
 
     PARAM(1001, "参数错误"),
-    DB(1002, "数据库异常"),
-    UNDEFINED(1999, "未定义的业务异常"),
+    PARAM_BEYOND_QUANTITY_NUMBER(1003, "参数错误，超出最大数量限制"),
 
     // 用户
-    PARAM_USER_NAME_NOT_EXISTED(1002, "用户名不存在"),
-    PARAM_USER_PASSWORD_ERROR(1003, "用户密码错误"),
+    PARAM_USER_NAME_NOT_EXISTED(1102, "用户名不存在"),
+    PARAM_USER_PASSWORD_ERROR(1103, "用户密码错误"),
 
     // 商品
     GOODS_IS_NOT_EXISTED(1301, "商品不存在"),
-    GOODS_IS_NOT_MARKETABLE(1302, "商品已经下架");
+    GOODS_IS_NOT_MARKETABLE(1302, "商品已经下架"),
+
+    DB(1401, "数据库异常"),
+
+    UNDEFINED(1999, "未定义的业务异常"),
+    ;
 
 
     private int code;

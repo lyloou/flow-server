@@ -5,6 +5,9 @@ import com.lyloou.common.status.Result;
 import com.lyloou.flow.model.flow.FlowReq;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author lyloou
  * @date 2020/01/02
@@ -35,5 +38,39 @@ public class UnitTest {
                 , Result.class);
 
         System.out.println(result);
+    }
+
+    public static <T> List<List<T>> partition(List<T> list, int partitionSize) {
+        List<List<T>> partitions = new ArrayList<>();
+        for (int i = 0; i < list.size(); i += partitionSize) {
+            partitions.add(list.subList(i, Math.min(i + partitionSize, list.size())));
+        }
+        return partitions;
+    }
+
+    @Test
+    public void testPartitionSize() {
+        List<String> yourlist = new ArrayList<String>() {{
+            add("0");
+            add("2");
+            add("3");
+            add("4");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+            add("0");
+        }};
+        System.out.println(partition(yourlist, 5));
     }
 }

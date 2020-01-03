@@ -32,12 +32,30 @@ public interface FlowMapper {
     List<Flow> listFlow(@Param("limit") int limit, @Param("offset") int offset);
 
     /**
-     * 不存在，则插入；存在，则更新；
+     * 同步；不存在，则插入；存在，则更新；
      *
      * @param flow flow实例
      * @return 影响的行数
      */
     @Update("insert into flow (day,item,is_disabled,is_archived) values (#{day},#{item},#{isDisabled},#{isArchived}) on duplicate key update" +
             " item=values(item),is_disabled=values(is_disabled),is_archived=values(is_archived)")
-    int insertOrUpdateFlow(Flow flow);
+    int syncFlow(Flow flow);
+
+
+    /**
+     * 批量同步；不存在，则插入；存在，则更新；
+     *
+     * @param flows flow列表
+     * @return 影响的行数
+     */
+    @Update("<script>" +
+            "insert into flow (day,item,is_disabled,is_archived) values " +
+            "<foreach collection='flows' item='item' separator=','> " +
+            "(#{day},#{item},#{isDisabled},#{isArchived}) " +
+            "</foreach> " +
+            "on duplicate key update " +
+            "item=values(item),is_disabled=values(is_disabled),is_archived=values(is_archived)" +
+            "</script>")
+    int batchSyncFlow(@Param("flows") List<Flow> flows);
+
 }

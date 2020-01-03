@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.lyloou.common.status.StatusCodeDict.COMMON_OK;
-import static com.lyloou.common.status.StatusCodeDict.COMMON_UNKNOWN;
+import static com.lyloou.common.status.StatusCodeDict.*;
 
 /**
  * @author lyloou
@@ -25,6 +25,7 @@ import static com.lyloou.common.status.StatusCodeDict.COMMON_UNKNOWN;
 public class FlowController {
 
     private static final Logger logger = LoggerFactory.getLogger(FlowController.class);
+    public static final int MAX_SYNC_NUMBER = 10;
 
     @Autowired
     private ResultHandler resultHandler;
@@ -49,7 +50,7 @@ public class FlowController {
 
     @PostMapping("/sync")
     public Result sync(@RequestBody FlowReq flowReq) {
-        int i = flowMapper.insertOrUpdateFlow(Flow.builder()
+        int i = flowMapper.syncFlow(Flow.builder()
                 .day(flowReq.getDay())
                 .item(flowReq.getItem())
                 .isArchived(flowReq.isArchived())
@@ -58,4 +59,19 @@ public class FlowController {
         return resultHandler.msgResult(() -> i >= 0 ? COMMON_OK : COMMON_UNKNOWN);
     }
 
+    @PostMapping("/batch_sync")
+    public Result batchSync(@RequestBody List<FlowReq> flowReqs) {
+        if (flowReqs.size() > MAX_SYNC_NUMBER) {
+            return resultHandler.msgResult(() -> PARAM_BEYOND_QUANTITY_NUMBER);
+        }
+        int i = flowMapper.batchSyncFlow(flowReqs.stream()
+                .map(flowReq -> Flow.builder().day(flowReq.getDay())
+                        .item(flowReq.getItem())
+                        .isArchived(flowReq.isArchived())
+                        .isDisabled(flowReq.isDisabled())
+                        .build())
+                .collect(Collectors.toList())
+        );
+        return resultHandler.msgResult(() -> i >= 0 ? COMMON_OK : COMMON_UNKNOWN);
+    }
 }
