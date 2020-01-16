@@ -7,29 +7,24 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-
-/**
- * @author lyloou
- */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Flow {
+public class User {
     private Long id;
 
-    private Long userId;
+    private String name;
+
+    private String email;
+
+    private Long phone;
+
+    private String avatar;
 
     private Date gmtCreate;
 
     private Date gmtModified;
 
-    private String day;
-
-    private String item;
-
-    private Boolean isArchived;
-
     private Boolean isDisabled;
-
 }

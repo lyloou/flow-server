@@ -30,7 +30,7 @@ public class FlowApplicationTests {
      */
     @Test
     public void testFlow() {
-        System.out.println(flowMapper.getFlow(null));
+        System.out.println(flowMapper.getFlow(1L, null));
     }
 
     @Autowired

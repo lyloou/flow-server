@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.lyloou.common.status.StatusCodeDict.*;
+import static com.lyloou.flow.controller.ValidateHelper.validate;
 
 /**
  * @author lyloou
@@ -34,23 +35,31 @@ public class FlowController {
     FlowMapper flowMapper;
 
     @RequestMapping("/list")
-    public Result list(@RequestParam(value = "limit", defaultValue = "10") int limit, @RequestParam(value = "offset", defaultValue = "0") int offset) {
-        List<Flow> flows = flowMapper.listFlow(limit, offset);
+    public Result list(@RequestParam(value = "user_id") Long userId,
+                       @RequestParam(value = "limit", defaultValue = "10") int limit,
+                       @RequestParam(value = "offset", defaultValue = "0") int offset) {
+        List<Flow> flows = flowMapper.listFlow(userId, limit, offset);
         return resultHandler.dataResult(() -> COMMON_OK, flows);
     }
 
     @RequestMapping("/get")
-    public Result get(@RequestParam(value = "day", defaultValue = "") String day) {
+    public Result get(
+            @RequestHeader("Authorization") String authorization,
+            @RequestParam(value = "user_id") Long userId,
+            @RequestParam(value = "day", defaultValue = "") String day) {
         if (StringUtil.isEmpty(day)) {
             day = TimeUtil.today();
         }
-        Flow flow = flowMapper.getFlow(day);
+        validate(authorization, userId);
+        Flow flow = flowMapper.getFlow(userId, day);
         return resultHandler.dataResult(() -> COMMON_OK, flow);
     }
+
 
     @PostMapping("/sync")
     public Result sync(@RequestBody FlowReq flowReq) {
         int i = flowMapper.syncFlow(Flow.builder()
+                .userId(flowReq.getUserId())
                 .day(flowReq.getDay())
                 .item(flowReq.getItem())
                 .isArchived(flowReq.isArchived())
@@ -60,7 +69,8 @@ public class FlowController {
     }
 
     @PostMapping("/batch_sync")
-    public Result batchSync(@RequestBody List<FlowReq> flowReqs) {
+    public Result batchSync(@RequestParam(value = "user_id") Long userId,
+                            @RequestBody List<FlowReq> flowReqs) {
         if (flowReqs.size() > MAX_SYNC_NUMBER) {
             return resultHandler.msgResult(() -> PARAM_BEYOND_QUANTITY_NUMBER);
         }
