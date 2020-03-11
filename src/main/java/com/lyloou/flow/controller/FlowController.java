@@ -7,6 +7,7 @@ import com.lyloou.common.util.TimeUtil;
 import com.lyloou.flow.mapper.FlowMapper;
 import com.lyloou.flow.model.flow.Flow;
 import com.lyloou.flow.model.flow.FlowReq;
+import com.lyloou.flow.service.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.lyloou.common.status.StatusCodeDict.*;
-import static com.lyloou.flow.controller.ValidateHelper.validate;
 
 /**
  * @author lyloou
@@ -35,29 +35,41 @@ public class FlowController {
     FlowMapper flowMapper;
 
     @RequestMapping("/list")
-    public Result list(@RequestParam(value = "user_id") Long userId,
-                       @RequestParam(value = "limit", defaultValue = "10") int limit,
-                       @RequestParam(value = "offset", defaultValue = "0") int offset) {
+    public Result list(
+            @RequestHeader("Authorization") String authorization,
+            @RequestParam(value = "user_id") Long userId,
+            @RequestParam(value = "limit", defaultValue = "10") int limit,
+            @RequestParam(value = "offset", defaultValue = "0") int offset) {
+        validator.validate(authorization, userId);
+
         List<Flow> flows = flowMapper.listFlow(userId, limit, offset);
         return resultHandler.dataResult(() -> COMMON_OK, flows);
     }
+
+    @Autowired
+    Validator validator;
 
     @RequestMapping("/get")
     public Result get(
             @RequestHeader("Authorization") String authorization,
             @RequestParam(value = "user_id") Long userId,
             @RequestParam(value = "day", defaultValue = "") String day) {
+        validator.validate(authorization, userId);
+
         if (StringUtil.isEmpty(day)) {
             day = TimeUtil.today();
         }
-        validate(authorization, userId);
         Flow flow = flowMapper.getFlow(userId, day);
         return resultHandler.dataResult(() -> COMMON_OK, flow);
     }
 
 
     @PostMapping("/sync")
-    public Result sync(@RequestBody FlowReq flowReq) {
+    public Result sync(
+            @RequestHeader("Authorization") String authorization,
+            @RequestBody FlowReq flowReq) {
+        validator.validate(authorization, flowReq.getUserId());
+
         int i = flowMapper.syncFlow(Flow.builder()
                 .userId(flowReq.getUserId())
                 .day(flowReq.getDay())
@@ -69,8 +81,12 @@ public class FlowController {
     }
 
     @PostMapping("/batch_sync")
-    public Result batchSync(@RequestParam(value = "user_id") Long userId,
-                            @RequestBody List<FlowReq> flowReqs) {
+    public Result batchSync(
+            @RequestHeader("Authorization") String authorization,
+            @RequestParam(value = "user_id") Long userId,
+            @RequestBody List<FlowReq> flowReqs) {
+        validator.validate(authorization, userId);
+
         if (flowReqs.size() > MAX_SYNC_NUMBER) {
             return resultHandler.msgResult(() -> PARAM_BEYOND_QUANTITY_NUMBER);
         }

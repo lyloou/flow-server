@@ -11,6 +11,7 @@ public enum StatusCodeDict {
     // 通用码
     COMMON_OK(0, "ok"),
     COMMON_UNKNOWN(9999, "未知的异常"),
+    COMMON_INVALID_REQUEST(9998, "无效的请求"),
 
     // 系统
     SYSTEM_404(404, "404你懂的"),

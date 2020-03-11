@@ -9,6 +9,7 @@ import com.lyloou.common.status.ResultHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -64,6 +65,10 @@ public class DemoExceptionHandler {
             NullPointerException exception = (NullPointerException) throwable;
             logger.error(exception.getMessage(), exception);
             return resultHandler.msgResult(() -> COMMON_UNKNOWN);
+        } else if (throwable instanceof MissingRequestHeaderException) {
+            MissingRequestHeaderException exception = (MissingRequestHeaderException) throwable;
+            logger.error(exception.getMessage(), exception);
+            return resultHandler.msgResult(() -> COMMON_INVALID_REQUEST).data(exception.getMessage());
         } else {
             logger.error(throwable.getMessage(), throwable);
             return resultHandler.msgResult(() -> COMMON_UNKNOWN);

@@ -3,6 +3,8 @@ package com.lyloou.flow;
 import com.lyloou.flow.config.myproperties.MyPropertiesBean;
 import com.lyloou.flow.mapper.EventMapper;
 import com.lyloou.flow.mapper.FlowMapper;
+import com.lyloou.flow.mapper.UserMapper;
+import com.lyloou.flow.model.flow.UserPassword;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -42,6 +44,15 @@ public class FlowApplicationTests {
     @Test
     public void testEvent() {
         System.out.println(eventMapper.listEvent());
+    }
+
+    @Autowired
+    UserMapper userMapper;
+
+    @Test
+    public void testUserPassword() {
+        UserPassword userPassword = userMapper.getUserPassword(1L);
+        System.out.println(userPassword);
     }
 
     @Autowired
