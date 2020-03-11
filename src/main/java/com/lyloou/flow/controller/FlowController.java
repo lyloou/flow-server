@@ -59,6 +59,7 @@ public class FlowController {
         if (StringUtil.isEmpty(day)) {
             day = TimeUtil.today();
         }
+        logger.info("hello {}, how are you?", userId);
         Flow flow = flowMapper.getFlow(userId, day);
         return resultHandler.dataResult(() -> COMMON_OK, flow);
     }
