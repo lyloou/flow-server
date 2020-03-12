@@ -22,6 +22,8 @@ public class User {
 
     private String avatar;
 
+    private String personalSignature;
+
     private Date gmtCreate;
 
     private Date gmtModified;

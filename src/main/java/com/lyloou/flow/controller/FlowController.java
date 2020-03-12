@@ -8,6 +8,7 @@ import com.lyloou.flow.mapper.FlowMapper;
 import com.lyloou.flow.mapper.UserMapper;
 import com.lyloou.flow.model.flow.Flow;
 import com.lyloou.flow.model.flow.FlowReq;
+import com.lyloou.flow.model.flow.User;
 import com.lyloou.flow.model.flow.UserPassword;
 import com.lyloou.flow.service.Validator;
 import org.slf4j.Logger;
@@ -78,7 +79,8 @@ public class FlowController {
         if (userPassword == null) {
             return resultHandler.dataResult(() -> PARAM_LOGIN_ERROR, null);
         }
-        return resultHandler.msgResult(() -> COMMON_OK);
+        User user = userMapper.getUser(userPassword.getUserId());
+        return resultHandler.dataResult(() -> COMMON_OK, user);
     }
 
     @PostMapping("/sync")
