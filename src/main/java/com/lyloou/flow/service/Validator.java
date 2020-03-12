@@ -12,7 +12,7 @@ public class Validator {
     UserMapper userMapper;
 
     public void validate(String authorization, Long userId) {
-        UserPassword userPassword = userMapper.getUserPassword(userId);
+        UserPassword userPassword = userMapper.getUserPasswordByUserId(userId);
         if (userPassword == null) {
             throw new ParamException(String.format("用户ID:%s不存在", userId));
         }

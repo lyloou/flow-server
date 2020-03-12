@@ -6,5 +6,8 @@ import org.apache.ibatis.annotations.Select;
 
 public interface UserMapper {
     @Select("select * from user_password where user_id=#{userId}")
-    UserPassword getUserPassword(Long userId);
+    UserPassword getUserPasswordByUserId(Long userId);
+
+    @Select("select * from user_password where name=#{name} and password=#{password}")
+    UserPassword getUserPasswordByNamePassword(String name, String password);
 }

@@ -51,7 +51,7 @@ public class FlowApplicationTests {
 
     @Test
     public void testUserPassword() {
-        UserPassword userPassword = userMapper.getUserPassword(1L);
+        UserPassword userPassword = userMapper.getUserPasswordByUserId(1L);
         System.out.println(userPassword);
     }
 

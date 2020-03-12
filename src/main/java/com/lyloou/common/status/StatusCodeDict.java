@@ -21,9 +21,8 @@ public enum StatusCodeDict {
     PARAM(1001, "参数错误"),
     PARAM_BEYOND_QUANTITY_NUMBER(1003, "参数错误，超出最大数量限制"),
 
-    // 用户
-    PARAM_USER_NAME_NOT_EXISTED(1102, "用户名不存在"),
-    PARAM_USER_PASSWORD_ERROR(1103, "用户密码错误"),
+    // 登录
+    PARAM_LOGIN_ERROR(1102, "用户名不存在或密码错误"),
 
     // 商品
     GOODS_IS_NOT_EXISTED(1301, "商品不存在"),
