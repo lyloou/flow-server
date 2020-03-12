@@ -37,7 +37,7 @@ public class FlowController {
     @RequestMapping("/list")
     public Result list(
             @RequestHeader("Authorization") String authorization,
-            @RequestParam(value = "user_id") Long userId,
+            @RequestHeader("UserId") Long userId,
             @RequestParam(value = "limit", defaultValue = "10") int limit,
             @RequestParam(value = "offset", defaultValue = "0") int offset) {
         validator.validate(authorization, userId);
@@ -52,7 +52,7 @@ public class FlowController {
     @RequestMapping("/get")
     public Result get(
             @RequestHeader("Authorization") String authorization,
-            @RequestParam(value = "user_id") Long userId,
+            @RequestHeader("UserId") Long userId,
             @RequestParam(value = "day", defaultValue = "") String day) {
         validator.validate(authorization, userId);
 
@@ -84,7 +84,7 @@ public class FlowController {
     @PostMapping("/batch_sync")
     public Result batchSync(
             @RequestHeader("Authorization") String authorization,
-            @RequestParam(value = "user_id") Long userId,
+            @RequestHeader("UserId") Long userId,
             @RequestBody List<FlowReq> flowReqs) {
         validator.validate(authorization, userId);
 
