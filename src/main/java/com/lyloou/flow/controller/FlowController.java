@@ -111,6 +111,7 @@ public class FlowController {
         }
         int i = flowMapper.batchSyncFlow(flowReqs.stream()
                 .map(flowReq -> Flow.builder().day(flowReq.getDay())
+                        .userId(flowReq.getUserId())
                         .item(flowReq.getItem())
                         .isArchived(flowReq.isArchived())
                         .isDisabled(flowReq.isDisabled())
