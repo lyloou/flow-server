@@ -28,6 +28,10 @@ public class Flow {
 
     private String item;
 
+    private String weather;
+
+    private String memo;
+
     private Boolean isArchived;
 
     private Boolean isDisabled;

@@ -39,8 +39,9 @@ public interface FlowMapper {
      * @param flow flow实例
      * @return 影响的行数
      */
-    @Update("insert into flow (user_id,day,item,is_disabled,is_archived) values (#{userId},#{day},#{item},#{isDisabled},#{isArchived}) on duplicate key update" +
-            " item=values(item),is_disabled=values(is_disabled),is_archived=values(is_archived)")
+    @Update("insert into flow (user_id,day,item,weather,memo,is_disabled,is_archived) " +
+            " values (#{userId},#{day},#{item},#{weather},#{memo},#{isDisabled},#{isArchived}) on duplicate key update" +
+            " item=values(item),weather=values(weather),memo=values(memo),is_disabled=values(is_disabled),is_archived=values(is_archived)")
     int syncFlow(Flow flow);
 
 
@@ -51,12 +52,12 @@ public interface FlowMapper {
      * @return 影响的行数
      */
     @Update("<script>" +
-            "insert into flow (user_id,day,item,is_disabled,is_archived) values " +
+            "insert into flow (user_id,day,item,weather,memo,is_disabled,is_archived) values " +
             "<foreach collection='flows' item='item' separator=','> " +
-            "(#{item.userId},#{item.day},#{item.item},#{item.isDisabled},#{item.isArchived}) " +
+            "(#{item.userId},#{item.day},#{item.item},#{item.weather},#{item.memo},#{item.isDisabled},#{item.isArchived}) " +
             "</foreach> " +
             "on duplicate key update " +
-            "item=values(item),is_disabled=values(is_disabled),is_archived=values(is_archived)" +
+            "item=values(item),weather=values(weather),memo=values(memo),is_disabled=values(is_disabled),is_archived=values(is_archived)" +
             "</script>")
     int batchSyncFlow(@Param("flows") List<Flow> flows);
 

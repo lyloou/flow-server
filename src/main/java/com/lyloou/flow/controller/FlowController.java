@@ -93,6 +93,8 @@ public class FlowController {
                 .userId(flowReq.getUserId())
                 .day(flowReq.getDay())
                 .item(flowReq.getItem())
+                .weather(flowReq.getWeather())
+                .memo(flowReq.getMemo())
                 .isArchived(flowReq.isArchived())
                 .isDisabled(flowReq.isDisabled())
                 .build());
@@ -113,6 +115,8 @@ public class FlowController {
                 .map(flowReq -> Flow.builder().day(flowReq.getDay())
                         .userId(flowReq.getUserId())
                         .item(flowReq.getItem())
+                        .weather(flowReq.getWeather())
+                        .memo(flowReq.getMemo())
                         .isArchived(flowReq.isArchived())
                         .isDisabled(flowReq.isDisabled())
                         .build())
