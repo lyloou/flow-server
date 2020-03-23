@@ -1,8 +1,8 @@
 package com.lyloou.flow.mapper;
 
 
-import com.lyloou.flow.model.flow.User;
-import com.lyloou.flow.model.flow.UserPassword;
+import com.lyloou.flow.model.user.User;
+import com.lyloou.flow.model.user.UserPassword;
 import org.apache.ibatis.annotations.Select;
 
 public interface UserMapper {

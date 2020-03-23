@@ -2,7 +2,7 @@ package com.lyloou.flow.service;
 
 import com.lyloou.common.exception.ParamException;
 import com.lyloou.flow.mapper.UserMapper;
-import com.lyloou.flow.model.flow.UserPassword;
+import com.lyloou.flow.model.user.UserPassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,10 +1,10 @@
 package com.lyloou.flow;
 
 import com.lyloou.flow.config.myproperties.MyPropertiesBean;
-import com.lyloou.flow.mapper.EventMapper;
 import com.lyloou.flow.mapper.FlowMapper;
+import com.lyloou.flow.mapper.ScheduleMapper;
 import com.lyloou.flow.mapper.UserMapper;
-import com.lyloou.flow.model.flow.UserPassword;
+import com.lyloou.flow.model.user.UserPassword;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -36,14 +36,14 @@ public class FlowApplicationTests {
     }
 
     @Autowired
-    EventMapper eventMapper;
+    ScheduleMapper scheduleMapper;
 
     /**
      * 数据库测试：event
      */
     @Test
     public void testEvent() {
-        System.out.println(eventMapper.listEvent());
+        System.out.println(scheduleMapper.listSchedule(1L, 10, 0));
     }
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.lyloou.flow.model.flow;
+package com.lyloou.flow.model.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

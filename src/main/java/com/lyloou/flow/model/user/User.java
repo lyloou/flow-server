@@ -1,4 +1,4 @@
-package com.lyloou.flow.model.flow;
+package com.lyloou.flow.model.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,21 +7,26 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-/**
- * @author lyloou
- */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class Event {
+@NoArgsConstructor
+public class User {
     private Long id;
+
+    private String name;
+
+    private String email;
+
+    private Long phone;
+
+    private String avatar;
+
+    private String personalSignature;
 
     private Date gmtCreate;
 
     private Date gmtModified;
 
-    private String day;
-
-    private String content;
+    private Boolean isDisabled;
 }

@@ -1,4 +1,4 @@
-package com.lyloou.flow.model.flow;
+package com.lyloou.flow.model.schedule;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,26 +7,25 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * @author lyloou
+ */
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+public class Schedule {
     private Long id;
 
-    private String name;
-
-    private String email;
-
-    private Long phone;
-
-    private String avatar;
-
-    private String personalSignature;
+    private Long userId;
 
     private Date gmtCreate;
 
     private Date gmtModified;
 
-    private Boolean isDisabled;
+    private String title;
+
+    private String content;
+
+    private boolean isDisabled;
 }
