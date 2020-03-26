@@ -64,6 +64,25 @@ public class FlowController {
         return resultHandler.dataResult(() -> COMMON_OK, flow);
     }
 
+    @Autowired
+    UserController userController;
+
+    /**
+     * 兼容 v1
+     *
+     * @param name
+     * @param password
+     * @return
+     */
+    @Deprecated
+    @PostMapping("login")
+    public Result login(
+            @RequestParam("name") String name,
+            @RequestParam("password") String password
+    ) {
+        return userController.login(name, password);
+    }
+
     @PostMapping("/sync")
     public Result sync(
             @RequestHeader("Authorization") String authorization,
