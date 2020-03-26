@@ -42,7 +42,7 @@ public class DemoExceptionHandler {
 
         if (throwable instanceof ParamException) {
             ParamException statusException = (ParamException) throwable;
-            return resultHandler.msgResult(() -> PARAM, statusException.getMessage());
+            return resultHandler.msgResult(() -> PARAM).appendMsg(statusException.getMessage());
         } else if (throwable instanceof ApiStatusException) {
             ApiStatusException statusException = (ApiStatusException) throwable;
             return resultHandler.msgResult(statusException.getStatusCode());
@@ -52,7 +52,7 @@ public class DemoExceptionHandler {
             return resultHandler.msgResult(() -> UNDEFINED);
         } else if (throwable instanceof MissingServletRequestParameterException) {
             MissingServletRequestParameterException exception = (MissingServletRequestParameterException) throwable;
-            return resultHandler.msgResult(() -> PARAM, exception.getMessage());
+            return resultHandler.msgResult(() -> PARAM).appendMsg(exception.getMessage());
         } else if (throwable instanceof IllegalStateException) {
             IllegalStateException exception = (IllegalStateException) throwable;
             logger.error(exception.getMessage(), exception);
@@ -68,7 +68,7 @@ public class DemoExceptionHandler {
         } else if (throwable instanceof MissingRequestHeaderException) {
             MissingRequestHeaderException exception = (MissingRequestHeaderException) throwable;
             logger.error(exception.getMessage(), exception);
-            return resultHandler.msgResult(() -> COMMON_INVALID_REQUEST, exception.getMessage());
+            return resultHandler.msgResult(() -> COMMON_INVALID_REQUEST).appendMsg(exception.getMessage());
         } else {
             logger.error(throwable.getMessage(), throwable);
             return resultHandler.msgResult(() -> COMMON_UNKNOWN);

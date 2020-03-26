@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 
+/**
+ * 返回统一的的 json 格式类
+ */
 public class Result {
 
     @JsonProperty("err_code")

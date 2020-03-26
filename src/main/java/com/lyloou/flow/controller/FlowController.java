@@ -5,11 +5,8 @@ import com.lyloou.common.status.ResultHandler;
 import com.lyloou.common.util.StringUtil;
 import com.lyloou.common.util.TimeUtil;
 import com.lyloou.flow.mapper.FlowMapper;
-import com.lyloou.flow.mapper.UserMapper;
 import com.lyloou.flow.model.flow.Flow;
 import com.lyloou.flow.model.flow.FlowReq;
-import com.lyloou.flow.model.user.User;
-import com.lyloou.flow.model.user.UserPassword;
 import com.lyloou.flow.service.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,22 +62,6 @@ public class FlowController {
         logger.info("hello {}, how are you?", userId);
         Flow flow = flowMapper.getFlow(userId, day);
         return resultHandler.dataResult(() -> COMMON_OK, flow);
-    }
-
-    @Autowired
-    UserMapper userMapper;
-
-    @PostMapping("login")
-    public Result login(
-            @RequestParam("name") String name,
-            @RequestParam("password") String password
-    ) {
-        UserPassword userPassword = userMapper.getUserPasswordByNamePassword(name, password);
-        if (userPassword == null) {
-            return resultHandler.dataResult(() -> PARAM_LOGIN_ERROR, null);
-        }
-        User user = userMapper.getUser(userPassword.getUserId());
-        return resultHandler.dataResult(() -> COMMON_OK, user);
     }
 
     @PostMapping("/sync")

@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * 错误码字典
+ */
 public enum StatusCodeDict {
 
 
