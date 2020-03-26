@@ -29,6 +29,10 @@ public class Schedule {
     private String title;
 
     private String content;
+    private String a;
+    private String b;
+    private String c;
+    private String d;
 
     private boolean isDisabled;
 }

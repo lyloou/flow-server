@@ -28,12 +28,12 @@ public interface ScheduleMapper {
      * @return 影响的行数
      */
     @Update("<script>" +
-            "insert into schedule (id,user_id,title,content) values " +
+            "insert into schedule (id,user_id,title,content,a,b,c,d) values " +
             "<foreach collection='schedules' item='item' separator=','> " +
-            "(#{item.id},#{item.userId},#{item.title},#{item.content}) " +
+            "(#{item.id},#{item.userId},#{item.title},#{item.content},#{item.a},#{item.b},#{item.c},#{item.d}) " +
             "</foreach> " +
             "on duplicate key update " +
-            "title=values(title),content=values(content)" +
+            "title=values(title),content=values(content),a=values(a),b=values(b),c=values(c),d=values(d)" +
             "</script>")
     int batchSyncSchedule(@Param("schedules") List<Schedule> schedules);
 
