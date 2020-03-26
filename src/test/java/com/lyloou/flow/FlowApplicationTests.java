@@ -1,10 +1,13 @@
 package com.lyloou.flow;
 
+import com.google.common.base.Joiner;
+import com.lyloou.common.util.IdGenerator;
 import com.lyloou.flow.config.myproperties.MyPropertiesBean;
 import com.lyloou.flow.mapper.FlowMapper;
 import com.lyloou.flow.mapper.ScheduleMapper;
 import com.lyloou.flow.mapper.UserMapper;
 import com.lyloou.flow.model.user.UserPassword;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -16,6 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.Jedis;
 
+import java.util.List;
 import java.util.Properties;
 
 @RunWith(SpringRunner.class)
@@ -83,6 +87,20 @@ public class FlowApplicationTests {
         jedis.setex(cacheName, 60, value);
         key = jedis.get(cacheName);
         assert key.equals(value);
+    }
+
+    @Autowired
+    IdGenerator idGenerator;
+
+    @Test
+    public void testGenerator() throws InterruptedException {
+        List<String> ids = Lists.newArrayList();
+        for (int i = 0; i < 10; i++) {
+            double delay = Math.random() * 1000;
+            Thread.sleep((long) delay);
+            ids.add(idGenerator.generate(IdGenerator.Type.ORDER));
+        }
+        System.out.println(Joiner.on(",\n").join(ids));
     }
 
     @Value("${spring.application.name}")

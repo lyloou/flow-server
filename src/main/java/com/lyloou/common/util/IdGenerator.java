@@ -12,7 +12,10 @@ import java.util.Date;
  */
 @Component
 public class IdGenerator {
-    enum Type {
+    /**
+     * 生成器类型
+     */
+    public enum Type {
         NORMAL(""),
         ORDER("OR"),
         PAYMENT("PM"),
@@ -25,10 +28,6 @@ public class IdGenerator {
         Type(String prefix) {
             this.prefix = prefix;
         }
-
-        public String getPrefix() {
-            return prefix;
-        }
     }
 
     private static String GENERATOR = "GENERATOR";
@@ -40,7 +39,7 @@ public class IdGenerator {
         String now = DateFormatUtils.format(new Date(), FORMAT_1);
         String key = GENERATOR + ":" + type.name();
         int counter = getCounter(key);
-        return String.format("%s%s", now, counter);
+        return String.format("%s%s%s", type.prefix, now, counter);
     }
 
     @Autowired
