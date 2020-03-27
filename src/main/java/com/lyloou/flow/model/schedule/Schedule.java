@@ -20,6 +20,8 @@ public class Schedule {
 
     private Long userId;
 
+    private String uuid;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date gmtCreate;
 
