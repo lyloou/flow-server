@@ -33,6 +33,7 @@ public class Schedule {
     private String b;
     private String c;
     private String d;
+    private Long syncTime;
 
     private boolean isDisabled;
 }
