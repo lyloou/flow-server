@@ -30,7 +30,7 @@ public interface ScheduleMapper {
     @Update("<script>" +
             "insert into schedule (uuid,user_id,title,content,a,b,c,d,sync_time,is_disabled) values " +
             "<foreach collection='schedules' item='item' separator=','> " +
-            "(#{item.userId},#{item.uuid},#{item.title},#{item.content},#{item.a},#{item.b},#{item.c},#{item.d},#{item.syncTime},#{item.isDisabled}) " +
+            "(#{item.uuid},#{item.userId},#{item.title},#{item.content},#{item.a},#{item.b},#{item.c},#{item.d},#{item.syncTime},#{item.isDisabled}) " +
             "</foreach> " +
             "on duplicate key update " +
             "title=values(title),content=values(content),a=values(a),b=values(b),c=values(c),d=values(d),sync_time=values(sync_time),is_disabled=values(is_disabled)" +
