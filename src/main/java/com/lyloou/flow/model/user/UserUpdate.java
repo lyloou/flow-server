@@ -9,9 +9,8 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class UserReq {
-    private Long id;
-    private String name;
+public class UserUpdate {
+    private String nickname;
     private String email;
     private Long phone;
     private String avatar;

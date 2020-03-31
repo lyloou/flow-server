@@ -4,7 +4,7 @@ import com.lyloou.common.status.Result;
 import com.lyloou.common.status.ResultHandler;
 import com.lyloou.flow.mapper.ScheduleMapper;
 import com.lyloou.flow.model.schedule.Schedule;
-import com.lyloou.flow.service.Validator;
+import com.lyloou.flow.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,21 +36,21 @@ public class ScheduleController {
             @RequestHeader("UserId") Long userId,
             @RequestParam(value = "limit", defaultValue = "10") int limit,
             @RequestParam(value = "offset", defaultValue = "0") int offset) {
-        validator.validate(authorization, userId);
+        userService.validate(authorization, userId);
 
         List<Schedule> schedules = scheduleMapper.listSchedule(userId, limit, offset);
         return resultHandler.dataResult(() -> COMMON_OK, schedules);
     }
 
     @Autowired
-    Validator validator;
+    UserService userService;
 
     @PostMapping("/batch_sync")
     public Result batchSync(
             @RequestHeader("Authorization") String authorization,
             @RequestHeader("UserId") Long userId,
             @RequestBody List<Schedule> schedules) {
-        validator.validate(authorization, userId);
+        userService.validate(authorization, userId);
 
         if (schedules.size() > MAX_SYNC_NUMBER) {
             return resultHandler.msgResult(() -> PARAM_BEYOND_QUANTITY_NUMBER);
@@ -64,7 +64,7 @@ public class ScheduleController {
             @RequestHeader("Authorization") String authorization,
             @RequestHeader("UserId") Long userId,
             @RequestBody List<Long> ids) {
-        validator.validate(authorization, userId);
+        userService.validate(authorization, userId);
 
         int num = scheduleMapper.batchDeleteSchedule(ids);
         return resultHandler.msgResult(() -> num >= 0 ? COMMON_OK : COMMON_UNKNOWN);

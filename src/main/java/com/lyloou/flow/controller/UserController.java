@@ -5,8 +5,9 @@ import com.lyloou.common.status.ResultHandler;
 import com.lyloou.flow.mapper.UserMapper;
 import com.lyloou.flow.model.user.User;
 import com.lyloou.flow.model.user.UserPassword;
-import com.lyloou.flow.model.user.UserReq;
-import com.lyloou.flow.service.Validator;
+import com.lyloou.flow.model.user.UserRegister;
+import com.lyloou.flow.model.user.UserUpdate;
+import com.lyloou.flow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +24,9 @@ public class UserController {
 
 
     @Autowired
-    Validator validator;
+    UserService userService;
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public Result login(
             @RequestParam("name") String name,
             @RequestParam("password") String password
@@ -39,12 +40,28 @@ public class UserController {
     }
 
 
+    @PostMapping("/register")
+    public Result register(@RequestBody UserRegister userRegister) {
+        Result result = userService.checkUserRegister(userRegister);
+        if (result != null) {
+            return result;
+        }
+
+        userRegister.setAvatar("http://cdn.lyloou.com/flow.png");
+        userService.saveUser(userRegister);
+
+        User user = userMapper.getUser(userRegister.getId());
+        return resultHandler.dataResult(() -> COMMON_OK, user);
+    }
+
+
     @PostMapping("/update")
     public Result update(
             @RequestHeader("Authorization") String authorization,
             @RequestHeader("UserId") Long userId,
-            @RequestBody UserReq userReq) {
-        validator.validate(authorization, userId);
+            @RequestBody UserUpdate userUpdate) {
+        userService.validate(authorization, userId);
+        userService.updateUser(userId, userUpdate);
         return resultHandler.msgResult(() -> COMMON_OK);
     }
 }

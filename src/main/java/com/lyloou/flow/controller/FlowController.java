@@ -7,7 +7,7 @@ import com.lyloou.common.util.TimeUtil;
 import com.lyloou.flow.mapper.FlowMapper;
 import com.lyloou.flow.model.flow.Flow;
 import com.lyloou.flow.model.flow.FlowReq;
-import com.lyloou.flow.service.Validator;
+import com.lyloou.flow.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,21 +40,21 @@ public class FlowController {
             @RequestHeader("UserId") Long userId,
             @RequestParam(value = "limit", defaultValue = "10") int limit,
             @RequestParam(value = "offset", defaultValue = "0") int offset) {
-        validator.validate(authorization, userId);
+        userService.validate(authorization, userId);
 
         List<Flow> flows = flowMapper.listFlow(userId, limit, offset);
         return resultHandler.dataResult(() -> COMMON_OK, flows);
     }
 
     @Autowired
-    Validator validator;
+    UserService userService;
 
     @GetMapping("/get")
     public Result get(
             @RequestHeader("Authorization") String authorization,
             @RequestHeader("UserId") Long userId,
             @RequestParam(value = "day", defaultValue = "") String day) {
-        validator.validate(authorization, userId);
+        userService.validate(authorization, userId);
 
         if (StringUtil.isEmpty(day)) {
             day = TimeUtil.today();
@@ -87,7 +87,7 @@ public class FlowController {
     public Result sync(
             @RequestHeader("Authorization") String authorization,
             @RequestBody FlowReq flowReq) {
-        validator.validate(authorization, flowReq.getUserId());
+        userService.validate(authorization, flowReq.getUserId());
 
         int i = flowMapper.syncFlow(Flow.builder()
                 .userId(flowReq.getUserId())
@@ -106,7 +106,7 @@ public class FlowController {
             @RequestHeader("Authorization") String authorization,
             @RequestHeader("UserId") Long userId,
             @RequestBody List<FlowReq> flowReqs) {
-        validator.validate(authorization, userId);
+        userService.validate(authorization, userId);
 
         if (flowReqs.size() > MAX_SYNC_NUMBER) {
             return resultHandler.msgResult(() -> PARAM_BEYOND_QUANTITY_NUMBER);
