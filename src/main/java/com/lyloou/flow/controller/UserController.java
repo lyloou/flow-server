@@ -2,6 +2,7 @@ package com.lyloou.flow.controller;
 
 import com.lyloou.common.status.Result;
 import com.lyloou.common.status.ResultHandler;
+import com.lyloou.common.status.StatusCodeDict;
 import com.lyloou.flow.mapper.UserMapper;
 import com.lyloou.flow.model.user.User;
 import com.lyloou.flow.model.user.UserPassword;
@@ -10,6 +11,8 @@ import com.lyloou.flow.model.user.UserUpdate;
 import com.lyloou.flow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 import static com.lyloou.common.status.StatusCodeDict.COMMON_OK;
 import static com.lyloou.common.status.StatusCodeDict.PARAM_LOGIN_ERROR;
@@ -39,6 +42,24 @@ public class UserController {
         return resultHandler.dataResult(() -> COMMON_OK, user);
     }
 
+    @PostMapping("/reset_password")
+    public Result resetPassword(
+            @RequestHeader("Authorization") String authorization,
+            @RequestHeader("UserId") Long userId,
+            @RequestParam("old_password") String oldPassword,
+            @RequestParam("new_password") String newPassword
+    ) {
+        userService.validate(authorization, userId);
+
+        UserPassword userPassword = userMapper.getUserPasswordByUserId(userId);
+        Objects.requireNonNull(userPassword);
+        if (!userPassword.getPassword().equals(oldPassword)) {
+            return resultHandler.msgResult(() -> StatusCodeDict.PARAM_USER_OLD_PASSWORD_NOT_MATCH);
+        }
+
+        userMapper.updateUserPassword(userId, newPassword);
+        return resultHandler.msgResult(() -> COMMON_OK);
+    }
 
     @PostMapping("/register")
     public Result register(@RequestBody UserRegister userRegister) {

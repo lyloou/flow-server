@@ -28,6 +28,7 @@ public enum StatusCodeDict {
     PARAM_LOGIN_ERROR(1102, "用户名不存在或密码错误"),
     PARAM_USER_NAME_EXISTED(1103, "用户名已存在"),
     PARAM_USER_NAME_PASSWORD_EMPTY(1104, "用户名或密码为空"),
+    PARAM_USER_OLD_PASSWORD_NOT_MATCH(1105, "原密码不正确"),
 
     // 商品
     GOODS_IS_NOT_EXISTED(1301, "商品不存在"),
